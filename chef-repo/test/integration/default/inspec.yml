@@ -1,0 +1,8 @@
+name: default
+title: Pruebas de integración para el stack de WordPress
+maintainer: Chef User
+copyright: Chef Software, Inc.
+copyright_email: support@chef.io
+license: Apache-2.0
+summary: Pruebas de integración para validar la instalación de Apache, MySQL, PHP y WordPress
+version: 1.0.0

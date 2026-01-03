@@ -1,0 +1,5 @@
+En chef-repo/nodes/*.json se guardar los ::facts
+
+Comentar la linea 
+ # include_recipe '::facts'
+ en default.rb para WSL

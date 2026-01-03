@@ -1,0 +1,6 @@
+{
+    "run_list": [
+      "recipe[apache::facts]"
+    ],
+    "some_attribute": "value"
+}

@@ -1,0 +1,53 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+  product_name: chef
+  product_version: 17
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-20.04
+
+suites:
+  - name: apache
+    run_list:
+      - recipe[apache::default]
+    attributes:
+      apache:
+        document_root: "/vagrant"
+        
+  - name: mysql
+    run_list:
+      - recipe[mysql::default]
+    attributes:
+      wordpress:
+        db_name: "wordpress"
+        db_user: "wordpress"
+        db_password: "wordpress123"
+        
+  - name: php
+    run_list:
+      - recipe[php::default]
+      
+  - name: wordpress
+    run_list:
+      - recipe[apache::default]
+      - recipe[mysql::default]
+      - recipe[php::default]
+      - recipe[wordpress::default]
+    attributes:
+      wordpress:
+        document_root: "/vagrant"
+        db_name: "wordpress"
+        db_user: "wordpress"
+        db_password: "wordpress123"
+        admin_user: "admin"
+        admin_password: "admin123"
+        admin_email: "admin@example.com"
+        title: "Blog de Naty"
+        url: "http://192.168.33.40"
