@@ -1,4 +1,11 @@
-require 'spec_helper'
+require 'chefspec'
+require 'chefspec/berkshelf'
+
+RSpec.configure do |config|
+  config.cookbook_path = ['../../..']
+  config.platform = 'ubuntu'
+  config.version = '20.04'
+end
 
 describe 'wordpress::default' do
   let(:chef_run) do
