@@ -1,4 +1,4 @@
 --color
 --format Fuubar
 --backtrace
---pattern 'cookbooks/**/spec/**/*_spec.rb'
+--pattern './cookbooks/**/spec/**/*_spec.rb'
