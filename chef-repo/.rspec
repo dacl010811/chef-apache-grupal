@@ -1,0 +1,3 @@
+--color
+--backtrace
+--pattern ./cookbooks/**/spec/**/*_spec.rb

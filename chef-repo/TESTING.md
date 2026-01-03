@@ -1,6 +1,6 @@
 # Pruebas para el proyecto chef-apache-grupal
 
-Este documento explica cómo ejecutar las pruebas unitarias e integración para los cookbooks de este proyecto.
+Este documento explica cómo ejecutar las pruebas unitarias e integración para los cookbooks de este proyecto usando Chef Workstation.
 
 ## Pruebas Unitarias
 
@@ -10,24 +10,36 @@ Las pruebas unitarias están escritas usando ChefSpec y RSpec para verificar que
 
 ```bash
 # Desde el directorio chef-repo
-bundle install
-bundle exec rspec
+chef exec rake spec
 ```
 
 ### Ejecutar pruebas para un cookbook específico
 
 ```bash
 # Para probar solo el cookbook de Apache
-bundle exec rake spec:apache
+chef exec rake spec:apache
 
 # Para probar solo el cookbook de MySQL
-bundle exec rake spec:mysql
+chef exec rake spec:mysql
 
 # Para probar solo el cookbook de PHP
-bundle exec rake spec:php
+chef exec rake spec:php
 
 # Para probar solo el cookbook de WordPress
-bundle exec rake spec:wordpress
+chef exec rake spec:wordpress
+
+# Para ejecutar todas las pruebas unitarias individualmente
+chef exec rake spec:all
+```
+
+### Ejecutar pruebas unitarias directamente con chef exec
+
+```bash
+# Ejecutar pruebas directamente con chef exec
+chef exec rspec cookbooks/apache/spec/unit/recipes/default_spec.rb
+chef exec rspec cookbooks/mysql/spec/unit/recipes/default_spec.rb
+chef exec rspec cookbooks/php/spec/unit/recipes/default_spec.rb
+chef exec rspec cookbooks/wordpress/spec/unit/recipes/default_spec.rb
 ```
 
 ## Pruebas de Integración
@@ -38,14 +50,17 @@ Las pruebas de integración están escritas usando InSpec y Test Kitchen para ve
 
 ```bash
 # Listar los ambientes de prueba
-kitchen list
+chef exec kitchen list
 
 # Probar un ambiente específico
-kitchen converge default-ubuntu-2004
-kitchen verify default-ubuntu-2004
+chef exec kitchen converge default-ubuntu-2004
+chef exec kitchen verify default-ubuntu-2004
 
 # O probar todo en un solo paso
-kitchen test
+chef exec kitchen test
+
+# Ejecutar todas las suites
+chef exec kitchen test --concurrency=1
 ```
 
 ## Estructura de directorios
@@ -55,7 +70,7 @@ chef-repo/
 ├── Gemfile                 # Dependencias de Ruby
 ├── .rspec                  # Configuración de RSpec
 ├── spec_helper.rb          # Configuración común para pruebas
-├── Rakefile               # Tareas para ejecutar pruebas
+├── Rakefile               # Tareas para ejecutar pruebas con chef exec
 ├── kitchen.yml            # Configuración de Test Kitchen
 ├── cookbooks/
 │   ├── apache/
@@ -72,3 +87,10 @@ chef-repo/
             ├── inspec.yml
             └── controls/  # Controles de verificación
 ```
+
+## Comandos útiles
+
+- `chef exec rake` - Ejecutar tareas Rake con el entorno de Chef
+- `chef exec rspec` - Ejecutar pruebas RSpec con el entorno de Chef
+- `chef exec kitchen` - Ejecutar comandos de Test Kitchen con el entorno de Chef
+- `chef --version` - Verificar la versión de Chef Workstation instalada
