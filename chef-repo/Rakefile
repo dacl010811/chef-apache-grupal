@@ -1,32 +1,31 @@
-# Rakefile para ejecutar pruebas unitarias de Chef con chef exec
+# Rakefile simplificado para ejecutar pruebas unitarias de Chef
 require 'rake'
-require 'rspec/core/rake_task'
 
 # Tarea para ejecutar todas las pruebas unitarias con chef exec
 desc 'Ejecutar todas las pruebas unitarias con chef exec'
 task :spec do
-  system('chef', 'exec', 'rspec', 'cookbooks/**/spec/**/*_spec.rb', '--format', 'Fuubar')
+  sh "chef exec rspec cookbooks/**/spec/**/*_spec.rb --format Fuubar"
 end
 
 # Tareas individuales para cada cookbook con chef exec
 desc 'Ejecutar pruebas unitarias para el cookbook de Apache con chef exec'
 task 'spec:apache' do
-  system('chef', 'exec', 'rspec', 'cookbooks/apache/spec/**/*_spec.rb', '--format', 'Fuubar')
+  sh "chef exec rspec cookbooks/apache/spec/**/*_spec.rb --format Fuubar"
 end
 
 desc 'Ejecutar pruebas unitarias para el cookbook de MySQL con chef exec'
 task 'spec:mysql' do
-  system('chef', 'exec', 'rspec', 'cookbooks/mysql/spec/**/*_spec.rb', '--format', 'Fuubar')
+  sh "chef exec rspec cookbooks/mysql/spec/**/*_spec.rb --format Fuubar"
 end
 
 desc 'Ejecutar pruebas unitarias para el cookbook de PHP con chef exec'
 task 'spec:php' do
-  system('chef', 'exec', 'rspec', 'cookbooks/php/spec/**/*_spec.rb', '--format', 'Fuubar')
+  sh "chef exec rspec cookbooks/php/spec/**/*_spec.rb --format Fuubar"
 end
 
 desc 'Ejecutar pruebas unitarias para el cookbook de WordPress con chef exec'
 task 'spec:wordpress' do
-  system('chef', 'exec', 'rspec', 'cookbooks/wordpress/spec/**/*_spec.rb', '--format', 'Fuubar')
+  sh "chef exec rspec cookbooks/wordpress/spec/**/*_spec.rb --format Fuubar"
 end
 
 # Tarea para ejecutar todas las pruebas unitarias individualmente
